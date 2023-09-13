@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Encryption Web App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        function toggleKeywordField() {
+            var method = document.getElementById('encryption_method').value;
+            var keywordField = document.getElementById('keyword_field');
+            if (method === 'vigenere') {
+                keywordField.style.display = 'block';
+            } else {
+                keywordField.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center">Encryption Web App</h1>
+        <form action="/" method="post" class="mt-5">
+            <div class="form-group">
+                <label for="text">Text to encrypt:</label>
+                <textarea name="text" id="text" rows="4" class="form-control" placeholder="Enter your text here" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="encryption_method">Choose encryption method:</label>
+                <select name="encryption_method" id="encryption_method" class="form-control" onchange="toggleKeywordField()">
+                    <option value="caesar">Caesar Cipher</option>
+                    <option value="vigenere">Vigenere Cipher</option>
+                </select>
+            </div>
+            <div class="form-group" id="keyword_field" style="display: none;">
+                <input type="text" name="keyword" placeholder="Enter keyword for Vigenere Cipher" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="number" name="shift" placeholder="Enter shift for Caesar Cipher" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Encrypt" class="btn btn-primary">
+            </div>
+        </form>
+
+        <h2 class="mt-4">Encrypted Text:</h2>
+        <p class="border p-3">{{ encrypted_text }}</p>
+    </div>
+</body>
+
+</html>
+
+
